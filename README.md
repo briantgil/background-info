@@ -17,7 +17,7 @@ Here, I use a powershell script to write active interface info to a file at boot
 
 ## Configure custom field
 1. Download and place *bginfo_custominfo.ps1* in the startup folder from above
-2. Create the file: *c:\users\\\<username>\bginfo_custom_info.txt*
+2. Create the file: *c:\users\\\<username>\bginfo_custom_info.txt*\*
 3. Open *bginfo_custominfo.ps1* and enter MAC addresses into `$nic_macs` array to allow printing (if must also be up)
 4. Run *bginfo_custominfo.ps1*
 5. Open *Bginfo64.exe*
@@ -32,3 +32,5 @@ Here, I use a powershell script to write active interface info to a file at boot
 14. Click **Apply**
 15. Click **OK**
 16. Verify BgInfo displays the information properly
+
+\*used this file location to bypass permission issues
