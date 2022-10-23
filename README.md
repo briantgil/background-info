@@ -6,34 +6,29 @@ Here, I use a powershell script to write active interface info to a file at boot
 
 ## Configure BgIno
 1. Download and extract *BGInfo.zip*
-2. Open another Windows Explorer
-3. Click in the location bar and type: `shell:startup` (user) or `shell:common startup`  (system)
-4. Place *Bginfo64.exe* in this folder -- BgInfo will run at boot up
-5. Change name to: *2_Bginfo64.exe*
-5. Open *2_Bginfo64.exe*
+2. Place *Bginfo64.exe* into *c:\users\\\<username>*, or a preferred directory*
+5. Open *Bginfo64.exe*
 6. Click the ***Time remaining*** box to prevent the app from closing
 7. Format the layout within the editor
 
-![bginfo app](https://github.com/briantgil/bginfo-custom-network-info/blob/main/bginfo.png)
-
-## Configure custom field
-1. Download *bginfo_custominfo.ps1* and place into *c:\users\\\<username>*, or a preferred directory
-2. Download *1_bginfo_custominfo.bat* and place into the startup folder from #3 above
-3. Open *bginfo_custominfo.ps1* and enter MAC addresses into `$nic_macs` array to allow printing (interface must be up)
-4. Open *1_bginfo_custominfo.bat* and enter the correct script path from #1
-5. Run *1_bginfo_custominfo.bat*
-5. Open *2_Bginfo64.exe*
+## Configure custom fields
+1. Download *bginfo_custominfo.ps1* and place into *c:\users\\\<username>*, or a preferred directory**
+4. Open Windows Explorer and type into the location bar: `shell:startup` (user) or `shell:common startup`  (system)
+2. Download *bginfo_custominfo.bat* and place into the startup folder from above
+3. Edit *bginfo_custominfo.ps1* and enter MAC address strings into `$nic_macs` array to allow printing (interfaces must be up)
+4. Edit *bginfo_custominfo.bat* and enter correct paths
+5. Run *bginfo_custominfo.bat* by double clicking it
+5. Open *Bginfo64.exe*
 6. Click the ***Time remaining*** box to prevent the app from closing
-7. Click **Custom**
-8. Click **New**
-9. Enter **Identifier**
-10. Select **Contents of a file**
-11. Click **Browse**
+7. Click **Custom** > Click **New** > Enter **Identifier** > Select **Contents of a file** > Click **Browse**
 12. Browse to: *c:\users\\\<username>\bginfo_custom_info.txt*
-13. Click **OK**
-14. Click **Apply**
-15. Click **OK**
+13. Click **OK** > Click **Apply** > Click **OK**
 16. Verify BgInfo displays the information properly
 17. Network info will overwrite on reboots
 
-\*used this file location to bypass permission issues
+![bginfo app](https://github.com/briantgil/bginfo-custom-network-info/blob/main/bginfo.png)
+
+*used this file location to bypass permission issues
+
+**ensure Powersehell Execution Policy is set to allow running scripts
+
