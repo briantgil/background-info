@@ -21,8 +21,8 @@ Here, I use a powershell script to write active interface info to a file at boot
 2. Download *1_bginfo_custominfo.bat* and place into the startup folder from #3 above
 3. Open *bginfo_custominfo.ps1* and enter MAC addresses into `$nic_macs` array to allow printing (interface must be up)
 4. Open *1_bginfo_custominfo.bat* and enter the correct script path from #1
-5. Run *bginfo_custominfo.bat*
-5. Open *Bginfo64.exe*
+5. Run *1_bginfo_custominfo.bat*
+5. Open *2_Bginfo64.exe*
 6. Click the ***Time remaining*** box to prevent the app from closing
 7. Click **Custom**
 8. Click **New**
