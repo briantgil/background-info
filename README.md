@@ -13,6 +13,8 @@ Here, I use a powershell script to write active interface info to a file at boot
 6. Click the ***Time remaining*** box to prevent the app from closing
 7. Format the layout within the editor
 
+![bginfo app](https://github.com/briantgil/bginfo-custom-network-info/blob/main/bginfo.png)
+
 ## Configure custom field
 1. Download and place *bginfo_custominfo.ps1* in the startup folder from above
 2. Create the file: *c:\users\\\<username>\bginfo_custom_info.txt*
