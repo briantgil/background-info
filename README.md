@@ -16,10 +16,11 @@ Here, I use a powershell script to write active interface info to a file at boot
 ![bginfo app](https://github.com/briantgil/bginfo-custom-network-info/blob/main/bginfo.png)
 
 ## Configure custom field
-1. Download and place *bginfo_custominfo.ps1* in the startup folder from above
-2. Create the file: *c:\users\\\<username>\bginfo_custom_info.txt*\*
-3. Open *bginfo_custominfo.ps1* and enter MAC addresses into `$nic_macs` array to allow printing (if must also be up)
-4. Run *bginfo_custominfo.ps1*
+1. Download *bginfo_custominfo.ps1* and place into *c:\users\\\<username>*, or a preferred directory
+2. Download *bginfo_custominfo.bat* and place into the startup folder from #3 above
+3. Open *bginfo_custominfo.ps1* and enter MAC addresses into `$nic_macs` array to allow printing (interface must be up)
+4. Open *bginfo_custominfo.bat* and enter the correct script path from #1
+5. Run *bginfo_custominfo.bat*
 5. Open *Bginfo64.exe*
 6. Click the ***Time remaining*** box to prevent the app from closing
 7. Click **Custom**
