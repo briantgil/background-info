@@ -22,7 +22,9 @@ Here, I use a powershell script to write active interface info to a file at boot
 6. Click the ***Time remaining*** box to prevent the app from closing
 7. Click **Custom** > Click **New** > Enter **Identifier** > Select **Contents of a file** > Click **Browse**
 12. Browse to: *c:\users\\\<username>\bginfo_custom_info.txt*
-13. Click **OK** > Click **Apply** > Click **OK**
+13. Click **OK**
+14. Select **Identifier** from within Fields pane
+15. Click **Apply** > Click **OK**
 16. Verify BgInfo displays the information properly
 17. Network info will overwrite on reboots
 
