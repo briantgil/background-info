@@ -1,6 +1,6 @@
 <#
-    Description: get network interface info and write it to a file
-    Brian T. Gil 10/23/2022
+    Description: get network interfaces and write them to a file
+    Brian T. Gil 10/27/2022
 #>
 
 
@@ -24,9 +24,9 @@ $keys = @(
 
 
 #get key: value spacing
-$diffs = @()
+$spaces = @()
 foreach ($key in $keys){
-    $diffs += $longest_key_size - $key.Length
+    $spaces += $longest_key_size - $key.Length
 }
 
 
@@ -48,17 +48,22 @@ Get-NetAdapter | ? {
                               $values += $config.IPSubnet[0]
                               $values += $config.DefaultIPGateway[0]
                               $values += $config.DNSServerSearchOrder -join ", "
-                              $values += $config.IPEnabled
+                              $values += $config.DHCPEnabled
                               $values += $config.DHCPServer
                                                 
-                              for ($i=0; $i -lt $items.Length; $i++){
-                                  $format_str += "$($keys[$i]):$(" " * $diffs[$i])$($values[$i])`n"
+                              for ($i=0; $i -lt $values.Length; $i++){
+                                  $format_str += "$($keys[$i]):$(" " * $spaces[$i])$($values[$i])`n"
                               }
 
                              }
 
 
-#write format string to file for bginfo
+if ($format_str -eq "`n"){
+    $format_str += "WARNING: No MACs defined in list ($($PSCommandPath))`n"
+}
+
+
+#write format string to file
 try {
     Set-Content -path $path -value $format_str  #creates file if it does not exist
 }
