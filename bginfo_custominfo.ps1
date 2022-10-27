@@ -1,19 +1,19 @@
-﻿<#
+<#
     Description: get network interface info and write it to a file
     Brian T. Gil 10/23/2022
 #>
 
 
 $nic_macs = @()  #add mac strings here
-$format_str = ""
+$format_str = "`n"
 $path = "$($env:USERPROFILE)\bginfo_custom_info.txt"
-$longest_word_size = 16
+$longest_key_size = 16
 
 
-$words = @(
-            "Interface",
-            "Speed",     
-            "MAC",         
+$keys = @(
+            "Interface",     
+            "MAC",      
+            "Speed",   
             "IP Address",      
             "Subnet Mask",    
             "Default Gateway", 
@@ -23,44 +23,45 @@ $words = @(
         )
 
 
+#get key: value spacing
 $diffs = @()
-foreach ($word in $words){
-    $diffs += $longest_word_size - $word.Length
-    #write-host "$($word): $($diffs[-1])"
+foreach ($key in $keys){
+    $diffs += $longest_key_size - $key.Length
 }
 
 
-Get-NetAdapter | ? {$_.MacAddress -in $nic_macs -and $_.Status -eq "Up"} | % {
+#get info for each interface and build formated string
+Get-NetAdapter | ? {
+                      $_.MacAddress -in $nic_macs -and $_.Status -eq "Up"    
+                     } | % {
+                              $values = @()
 
-                                                $index = $_.InterfaceIndex
-                                                $name = $_.InterfaceDescription
-                                                $mac = $_.MacAddress
-                                                $speed = $_.LinkSpeed
-                                                $config = (Get-WmiObject Win32_NetworkAdapterConfiguration | ? {$_.InterfaceIndex -eq $index})
-                                                $ipaddr = $config.IpAddress[0]
-                                                $mask = $config.IPSubnet[0]
-                                                $dg = $config.DefaultIPGateway[0]
-                                                $nameservers = $config.DNSServerSearchOrder -join ", "
-                                                $is_dhcp = $config.IPEnabled
-                                                $dhcpservers  = $config.DHCPServer
-                                                $format_str += @"
-$($words[0]):$(" " * $diffs[0])$name
-$($words[1]):$(" " * $diffs[1])$speed
-$($words[2]):$(" " * $diffs[2])$mac
-$($words[3]):$(" " * $diffs[3])$ipaddr
-$($words[4]):$(" " * $diffs[4])$mask
-$($words[5]):$(" " * $diffs[5])$dg
-$($words[6]):$(" " * $diffs[6])$nameservers
-$($words[7]):$(" " * $diffs[7])$is_dhcp
-$($words[8]):$(" " * $diffs[8])$dhcpservers
-"@
-}
+                              $index = $_.InterfaceIndex
+
+                              $values += $_.InterfaceDescription
+                              $values += $_.MacAddress
+                              $values += $_.LinkSpeed
+                                                
+                              $config = (Get-WmiObject Win32_NetworkAdapterConfiguration | ? {$_.InterfaceIndex -eq $index})
+                                                
+                              $values += $config.IpAddress[0]
+                              $values += $config.IPSubnet[0]
+                              $values += $config.DefaultIPGateway[0]
+                              $values += $config.DNSServerSearchOrder -join ", "
+                              $values += $config.IPEnabled
+                              $values += $config.DHCPServer
+                                                
+                              for ($i=0; $i -lt $items.Length; $i++){
+                                  $format_str += "$($keys[$i]):$(" " * $diffs[$i])$($values[$i])`n"
+                              }
+
+                             }
 
 
-#$format_str
+#write format string to file for bginfo
 try {
     Set-Content -path $path -value $format_str  #creates file if it does not exist
 }
 catch {
-    Write-Host $_
+    Write-Host $_  #error object
 }
